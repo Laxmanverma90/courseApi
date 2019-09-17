@@ -46,6 +46,15 @@ public class CourseController {
 		return new ResponseEntity<>(courseService.getAllCourse(registrationId), HttpStatus.OK);
 	}
 	
+	/**
+	 * This method will return the course detail based on the courseId.
+	 * 
+	 * @param courseId
+	 * @return CourseDetailDto
+	 * 
+	 * @author Laxman
+	 * @date 16 Sept 2019
+	 */
 	@GetMapping("/courses/{courseId}")
 	public ResponseEntity<CourseDetailDto> getCourseDetailById(@PathVariable Integer courseId){
 		
@@ -53,6 +62,19 @@ public class CourseController {
 		return new ResponseEntity<>(courseService.getCourseDetailById(courseId), HttpStatus.OK);
 	}
 	
-
-	
+	/**
+	 * This method return List of the course based on the list of course Ids
+	 * 
+	 * @param courseIds (list)
+	 * @return List<CourseDetailDto>
+	 * 
+	 * @author Laxman
+	 * @date 16 Sept 2019
+	 */
+	@GetMapping("/courses/courseIds")
+	public ResponseEntity<List<CourseDetailDto>> getCoursesById(@RequestParam List<Integer> courseIds){
+		
+		log.info("CourseController :: getCoursesById --- ");
+		return new ResponseEntity<>(courseService.getCoursesById(courseIds), HttpStatus.OK);
+	}
 }
