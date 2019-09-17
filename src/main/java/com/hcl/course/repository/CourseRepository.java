@@ -16,8 +16,8 @@ import com.hcl.course.entity.Course;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Integer> {
 
-//	public static final String FIND_COURSENAME_DURATION = "SELECT courseId, courseName, courseDuration FROM Course WHERE courseId NOT IN :courseIds ";
-	
 	@Query(value="SELECT courseId, courseName, courseDuration FROM Course WHERE courseId NOT IN :courseIds ")
 	Optional<List<Object[]>> findCourseNameAndDuration(List<Integer> courseIds);
+	
+	Optional<List<Course>> findByCourseIdIn(List<Integer> courseIds);
 }

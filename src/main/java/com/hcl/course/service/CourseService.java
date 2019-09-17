@@ -11,4 +11,6 @@ public interface CourseService {
 
 	CourseDetailDto getCourseDetailById(Integer courseId);
 
+	List<CourseDetailDto> getCoursesById(List<Integer> courseIds);
+
 }
