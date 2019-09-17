@@ -1,7 +1,11 @@
 package com.hcl.course.exception;
 
+import java.time.LocalDate;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
@@ -9,7 +13,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  *
  */
 @ControllerAdvice
-@RestController
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+	
+	@ExceptionHandler(InvalidUserException.class)
+	public ResponseEntity<ErrorResponse> invalidUserExceptionHandler(InvalidUserException exception)
+	{
+		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), exception.getMessage(),
+				"Failed");
+
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+	}
+
 
 }
